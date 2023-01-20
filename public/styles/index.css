@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Source+Sans+Pro:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient(45deg, #2f0044, #8e24aa);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    color: white;
+    font-family: 'Happy Monkey', sans-serif;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #270152;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    margin: auto;
+    margin-top: 5rem;
+}
+
+#search {
+    background-color: #270152;
+    border-radius: 10px;
+    margin-left: 1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #270152;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.header {
+    text-align: center;
+    margin: 5rem 0;
+
+}
+
+.header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.header p {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+#link-container {
+    background-color: rgb(98, 0, 255);
+    border-radius: 10px;
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#link-container.copied {
+    background-color: rgb(0, 128, 75);
+    transition: background-color 1s ease;
+}
+
+#result-container {
+    display: none;
+}
+
+#link {
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+
+}
+
+#copy {
+    right: 15px;
+}
+
+#chart {
+    right: 5px;
+}
+
+#qr {
+    right: 50px;
+}
+
+#open-link {
+    right: 80px;
+}
+
+.icon {
+    position: absolute;
+}
+
+a {
+    color: inherit;
+}
+
+.hoverable {
+    cursor: pointer;
+}
+
+
+
+.center {
+    text-align: center;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+button[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Happy Monkey', sans-serif;
+}
+
+input[type="text"] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+    color: #270152;
+    font-size: 1.2rem;
+    font-weight: 300;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="text"]:focus {
+    background-color: #fff;
+    border-color: #420061;
+    outline: none;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+}
+
+#dialog {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#close-btn {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+footer {
+    display: flex;
+    position: absolute;
+    left: 0;
+    bottom:0;
+    width:100%;
+    background-color: rgb(58, 0, 124);
+    justify-content: center;
+}
+
+@media screen and (max-width: 970px) {
+    html {
+        font-size: 14px;
+    }
+
+    #link {
+        justify-content: start;
+        padding-left: 5px;
+        font-size: 1rem;
+    }
+
+    #copy {
+        right: 15px;
+    }
+
+    #chart {
+        right: 0px;
+    }
+
+    #qr {
+        right: 40px;
+    }
+
+    #open-link {
+        right: 60px
+    }
+
+    #form {
+        width: 88%;
+    }
+}
