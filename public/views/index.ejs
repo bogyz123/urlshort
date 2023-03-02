@@ -10,19 +10,21 @@
     <script src="https://kit.fontawesome.com/99e935dfde.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <title>Shorten your links, expand your reach with Linkify.</title>
-</head>
 
+</head>
 <body>
     <h1 id="header" class="center">linkify ♡</h1>
     <p id="description" class="center">your <span style="color:orangered">favorite</span> url shortener</p>
     <div id="form">
         <form method="POST" action="/new">
             <label for="url" class="center">URL</label>
-
             <input type="text" name="url" />
-            <button type="submit">linkify!</button>
+            <button type="submit" id="linkify">linkify!</button>
+            <p id="site-description">Our URL shortening service allows you to easily shorten long and unwieldy URLs into
+                shorter, more manageable links. With just a click, you can turn a complex URL into a shorter, simpler
+                link that's easy to share on social media, in emails, or on messaging platforms. </p>
         </form>
-        <div id="result-container" style="display: <%= display %> ">
+        <div id="result-container" style="display: <%= display %>">
 
             <h1 class="center">Congratulations, your link is on the way!</h1>
             <div id="link-container">
@@ -35,24 +37,39 @@
                 <i class="fa-solid fa-qrcode icon hoverable" id="qr"></i>
                 <i class="fa-solid fa-arrow-up-right-from-square icon hoverable" id="open-link"></i>
 
+                <form action="/statistics/<%= shortUrl %>" method="get">
+                    <label for="submit-btn">
+                        <i class="fa-solid fa-chart-simple icon hoverable" id="chart-open"></i>
+                    </label>
+                    <button type="submit" id="submit-btn" style="display: none;"></button>
+                </form>
+
+
             </div>
         </div>
     </div>
     <footer>
         <p>Shorten your links, expand your reach with Linkify.</p>
+        <img src='../styles/git.png' alt="github profile" id="credits">
     </footer>
 
-    </img>
+
 
     <script defer>
         var newUrl = '<%= newUrl %>';
         var oldUrl = '<%= oldUrl %>';
+        var clicks = '<%= clicks %>';
+        var shortId = '<%= shortUrl %>';
+
         document.getElementById("copy").addEventListener("click", function () {
             document.getElementById("link-container").classList.add("copied");
             navigator.clipboard.writeText(newUrl); // Kopiranje generisanog URL-a.
         });
         document.getElementById("open-link").addEventListener('click', () => {
             window.open(oldUrl); // Open url za shortened url
+        });
+        document.getElementById("credits").addEventListener("click", () => {
+            window.open("https://www.github.com/bogyz123/linkify", "_blank");
         });
 
 
@@ -62,11 +79,9 @@
         // Ovo je dialog/container za qr code
         var dialog = document.createElement("div");
         var qrContainer = document.createElement("div"); // inner container za qr (najblizi parent)
+        qrContainer.id = 'qrCode';
         dialog.id = "dialog";
         dialog.style.display = "none";
-
-
-
 
         //#region Zatvaranje QR Dialoga
 
@@ -80,9 +95,7 @@
             dialog.style.display = "none"; // 
             qrContainer.innerHTML = "";
         });
-        //#endregion
 
-        //#region Otvaranje QR Dialoga
 
         qrOpen.addEventListener("click", function () {
             if (dialog.style.display != 'none') {
@@ -96,15 +109,30 @@
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H,
-
             });
-            qr.make(); // Kreira QR code sa opcijama
 
         });
+
         //#endregion
 
+        //#region Otvaranje QR Dialoga
 
+        //#endregion
 
+        // Add save button
+        var saveQr = document.createElement("button");
+        saveQr.innerHTML = "Save QR";
+        saveQr.id = "save-qr";
+        saveQr.style.cursor = 'pointer'
+        dialog.appendChild(saveQr);
+        saveQr.addEventListener("click", function () {
+            var canvas = document.getElementById("qrCode").querySelector("canvas");
+            var dataURL = canvas.toDataURL();
+            var link = document.createElement("a");
+            link.href = dataURL;
+            link.download = "qr-code.png";
+            link.click();
+        });
         document.body.appendChild(dialog);
     </script>
 </body>

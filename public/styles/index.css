@@ -5,39 +5,38 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: linear-gradient(45deg, #2f0044, #8e24aa);
+    background: linear-gradient(45deg, #260038, #18001f);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
     color: white;
     font-family: 'Happy Monkey', sans-serif;
-}
-body {
     display: flex;
     flex-direction: column;
 }
 
+
 #form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 50%;
-    font-family: 'Source Sans Pro', sans-serif;
     padding: 2rem;
     border-radius: 10px;
     background-color: #270152;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     margin: auto;
-    margin-top: 5rem;
+    margin-top: 4%;
+    width: 50%;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 #search {
     background-color: #270152;
     border-radius: 10px;
     margin-left: 1rem;
-    font-family: 'Source Sans Pro', sans-serif;
     padding: 2rem;
-    border-radius: 10px;
-    background-color: #270152;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
@@ -59,7 +58,6 @@ body {
 .header {
     text-align: center;
     margin: 5rem 0;
-
 }
 
 .header h1 {
@@ -93,28 +91,32 @@ body {
 
 #link {
     font-size: 1.1rem;
-    font-family: 'Source Sans Pro', sans-serif;
     width: 100vw;
     display: flex;
     justify-content: center;
-
 }
 
+
 #copy {
-    right: 15px;
+    right: 35px;
 }
 
 #chart {
-    right: 5px;
+    right: 20px;
 }
 
 #qr {
-    right: 50px;
+    right: 70px;
 }
 
 #open-link {
-    right: 80px;
+    right: 100px;
 }
+
+#chart-open {
+    right: 13px;
+}
+
 
 .icon {
     position: absolute;
@@ -149,7 +151,7 @@ a {
     margin-bottom: 0.5rem;
 }
 
-button[type="submit"] {
+#linkify {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -184,10 +186,9 @@ input[type="text"]:focus {
     outline: none;
 }
 
-button[type="submit"]:hover {
+#submit:hover {
     background-color: #45a049;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-
 }
 
 #dialog {
@@ -209,16 +210,83 @@ button[type="submit"]:hover {
     background-color: transparent;
     border: none;
 }
-footer {
-    display: flex;
-    position: absolute;
-    left: 0;
-    bottom:0;
-    width:100%;
-    background-color: rgb(58, 0, 124);
-    justify-content: center;
+
+#save-btn {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    margin-top: 7px;
 }
 
+
+#save-btn:hover {
+    background-color: darkblue;
+    transform: scale(1.1);
+}
+
+#save-btn:active {
+    background-color: navy;
+    transform: scale(0.9);
+}
+
+footer {
+    display: flex;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: rgb(29, 0, 63);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    column-gap: 5px;
+
+}
+footer #credits {
+   width: 35px;
+   height: 35px;
+   cursor: pointer;
+}
+
+#site-description {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: .5px;
+    word-wrap: break-word;
+    text-align: center;
+    line-height: 1.3rem;
+}
+
+#save-qr {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Add some hover effects to the button */
+#save-qr:hover {
+    background-color: #3e8e41;
+    /* Darker green on hover */
+}
+
+/* Add a press effect to the button */
+#save-qr:active {
+    background-color: #3e8e41;
+    /* Same color as hover state */
+    transform: translateY(4px);
+    /* Move button down 4px */
+}
 @media screen and (max-width: 970px) {
     html {
         font-size: 14px;
@@ -231,22 +299,26 @@ footer {
     }
 
     #copy {
-        right: 15px;
+        right: 10px;
     }
 
     #chart {
-        right: 0px;
+        right: 30px;
     }
 
     #qr {
-        right: 40px;
+        right: 50px;
     }
 
     #open-link {
-        right: 60px
+        right: 70px
     }
 
     #form {
         width: 88%;
+    }
+
+    #chart-open {
+        right: 33px;
     }
 }
