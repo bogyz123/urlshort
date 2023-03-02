@@ -1,1 +1,19 @@
-*Server side*
+App: 
+The website allows you to transform a URL to a custom, shorter URL.
+
+MongoDB:
+When the Linkify button is clicked, it adds a key/value pair variable where the key is the original URL you've passed in, and the value is the shortened URL.
+
+Express:
+The Express server listens for any GET requests on the '/:url' endpoint, then extracts the ':url' variable, and looks for it in the MongoDB database.
+Then, it simply opens the original URL (key) that is associated with that shortened URL.
+
+QRJs:
+After a short URL is generated, it allows you to see a QR Code representing the shortened URL link.
+It uses the QRJs library for that, where we instantiate a 'QRCode' object, pass in the information about the QR (width, height, correctionLevel, etc.) and then we append it into a <canvas> element.
+
+Chart.js
+You can see statistics for every generated URL (amount of clicks per month/s).
+The MongoDB schema has a 'clicksPerMonth' map, which contains each month of the year (string) and the amount of clicks per that month (int).
+When you visit a URL, it gets the current month with the 'Date' object, and increments it by 1 in Mongo.
+Express catches any GET requests on the '/statistics/:url' endpoint, extracts the URL, finds it in the database, then it renders a new page and provides the document it found to Chart.Js which then renders the Chart based on the 'clicksPerMonth' field in the document.
