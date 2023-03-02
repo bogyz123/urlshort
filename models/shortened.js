@@ -17,22 +17,6 @@ const schema = new mongoose.Schema({
     createdAt: {
         type: Date,
         required: true
-    },
-    clicksPerMonth: {
-        type: Map,
-        of: Number,
-        default: {
-            "January:": 0,
-            "February": 0,
-            "March": 0,
-            "June": 0,
-            "July": 0,
-            "August": 0,
-            "September": 0,
-            "October": 0,
-            "November": 0,
-            "December": 0
-        }
-    },
+    }
 });
 module.exports = mongoose.model("ShortenedUrl", schema);
