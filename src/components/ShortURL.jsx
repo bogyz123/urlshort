@@ -8,7 +8,7 @@ export default function ShortURL()
         
         function RedirectToOriginalURL(shortenedUrl) 
         {
-            var endpoint = "https://cfd0-178-221-74-187.ngrok-free.app/shortener/v1/getUrl/" + shortenedUrl;
+            var endpoint = "https://2d5b-178-223-1-74.ngrok-free.app/shortener/v1/getUrl/" + shortenedUrl;
             fetch(endpoint, {
                 headers: {
                     "ngrok-skip-browser-warning": "69420",

@@ -60,7 +60,7 @@ export default function URLShortener()
  function ShortenURL(url, setOldUrl, setNewUrl, setError) {
     if (url && url.length > 3) 
     {
-        var endpoint = "https://cfd0-178-221-74-187.ngrok-free.app/shortener/v1/shorten";
+        var endpoint = "https://2d5b-178-223-1-74.ngrok-free.app/shortener/v1/shorten";
         fetch (endpoint, {
             headers: {
                 "ngrok-skip-browser-warning": "69420",
