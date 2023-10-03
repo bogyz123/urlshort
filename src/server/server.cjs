@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://bogyz1337:hmmwhatcoulditbe?@cluster0.r5hhpts.mongodb.net/?retryWrites=true&w=majority";
+const { MongoClient } = require("mongodb");
+const uri = "mongodb+srv://bogyz1337:whatcoulditbe?@cluster0.r5hhpts.mongodb.net/?retryWrites=true&w=majority";
 
-const cors = require('cors');
+const cors = require("cors");
 
 app.use(cors());
 app.options("*", cors());
 app.get("/", (req, res) => {
-  res.status(404).json({ oops: 'we dont serve that here, looking for /checkProxy or /shortener?' });
+  res.status(404).json({ oops: "we dont serve that here, looking for /checkProxy or /shortener?" });
 });
 
 const client = new MongoClient(uri);
@@ -25,7 +25,7 @@ async function RunServer() {
 
 RunServer();
 
-app.get("/shortener/v1/getUrl/:url" , async (req, res) => {
+app.get("/shortener/v1/getUrl/:url", async (req, res) => {
   if (req.method !== "GET") {
     res.status(405).json({ status: 405, message: "Method Not Allowed" });
     return;
@@ -39,7 +39,7 @@ app.get("/shortener/v1/getUrl/:url" , async (req, res) => {
     console.log("y");
     const db = server.db("shortbase");
     const schema = {
-      short: url
+      short: url,
     };
 
     const doc = await db.collection("shorturls").findOne(schema);
@@ -59,7 +59,7 @@ app.get("/shortener/v1/getUrl/:url" , async (req, res) => {
 });
 
 app.post("/shortener/v1/shorten", async (req, res) => {
-  if (req.method !== 'POST') {
+  if (req.method !== "POST") {
     res.status(405).json({ status: 405, message: "Method Not Allowed" });
   }
   const { url } = req.headers;
@@ -81,7 +81,7 @@ async function ShortenURL(url) {
 
     const result = await database.collection("shorturls").insertOne({
       original: url,
-      short: randomUrl
+      short: randomUrl,
     });
 
     return { result: result, oldUrl: url, newUrl: randomUrl };
@@ -96,7 +96,7 @@ async function ShortenURL(url) {
 
 function GetShortURL() {
   var shortUrl = "";
-  var possibilities = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  var possibilities = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
   for (let i = 0; i < 6; i++) {
     var randomIndex = Math.floor(Math.random() * possibilities.length);
     shortUrl += possibilities[randomIndex];
@@ -105,5 +105,5 @@ function GetShortURL() {
 }
 
 app.listen(1337, () => {
-  console.log('Server started on port 1337');
+  console.log("Server started on port 1337");
 });

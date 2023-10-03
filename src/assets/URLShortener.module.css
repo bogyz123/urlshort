@@ -1,106 +1,127 @@
 :root {
-    --ltblue: rgb(72, 160, 248);
-    --darkblue: rgb(9, 113, 216);
+  --ltblue: rgb(72, 160, 248);
+  --darkblue: rgb(9, 113, 216);
 }
-
-
+#goBack {
+  width: 25px;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  cursor: pointer;
+}
 #urlShortener {
-    padding: 12px;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  padding: 12px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
+.animationNarrow {
+  animation: narrow 1.5s ease forwards;
+}
+@keyframes narrow {
+  0% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 #shortenerInner {
-    background-color: dodgerblue;
-    width: 50%;
-    height: 50%;
-    border-radius: .35rem;
-    padding: 12px;
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    color: white;
-    min-width: 450px;
-   
+  background-color: dodgerblue;
+  width: 50%;
+  height: 50%;
+  border-radius: 0.35rem;
+  padding: 12px;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  color: white;
 }
 .btn {
-    background-color: rgb(52, 115, 177);
-    border:none;
-    outline:none;
-    cursor: pointer;
-    border-radius: .25rem;
-    padding: 5px 10px;
-    font-size: 1.05rem;
-    transition: all ease 0.3s;
+  background-color: rgb(52, 115, 177);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  padding: 5px 10px;
+  font-size: 1.05rem;
+  transition: all ease 0.3s;
 }
 .link {
-    text-decoration: none;
-    text-align: center;
-    color: white;
+  text-decoration: none;
+  text-align: center;
+  color: white;
 }
 #linkify {
-    color: white;
+  color: white;
 }
 #linkify:hover {
-    padding:12px;
+  padding: 12px;
 }
 
 input {
-    border:none;
-    outline:none;
-    padding: 10px 25px;
-    border-radius: .25rem;
+  border: none;
+  outline: none;
+  padding: 10px 25px;
+  border-radius: 0.25rem;
 }
 #shortenedData {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 .urls {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 #qrcode {
-    width: fit-content;
-    height: fit-content;
-    transition: all .5s ease;
-    
+  width: fit-content;
+  height: fit-content;
+  transition: all 0.5s ease;
 }
 #qrcode:hover {
-    margin: 50px;
-    scale: 2;
+  margin: 50px;
+  scale: 2;
 }
 .animated:hover {
-    background-color: rgb(68, 125, 182);
+  background-color: rgb(68, 125, 182);
 }
 .error {
-    position: absolute;
-    left:15px;
-    bottom:15px;
-    background-color: rgba(153, 43, 43, 0.2);
-    padding: 7px 21px;
-    color: crimson;
-    border-radius: .25rem;
-    user-select: none;
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+  background-color: rgba(153, 43, 43, 0.2);
+  padding: 7px 21px;
+  color: crimson;
+  border-radius: 0.25rem;
+  user-select: none;
 }
-@media screen and (max-width:1300px) {
-    #urlContainer {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        row-gap: 30px;
-    }
-    .error {
-        text-align: center;
-        left:0;
-        width: 100%;
-        border-radius: 0;
-    }
+@media screen and (max-width: 1300px) {
+  #urlContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 30px;
+  }
+  .error {
+    text-align: center;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+  #shortenerInner {
+    min-width: 80%;
+  }
 }
