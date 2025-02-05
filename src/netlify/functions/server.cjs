@@ -1,12 +1,14 @@
 const express = require("express");
 const app = express();
 const { MongoClient } = require("mongodb");
-const uri = "mongodb+srv://bogyz1337:whatcoulditbe?@cluster0.r5hhpts.mongodb.net/?retryWrites=true&w=majority";
-
+const uri = process.env.MONGODB_URI;
+const serverless = require("serverless-http");
 const cors = require("cors");
 
 app.use(cors());
 app.options("*", cors());
+
+
 app.get("/", (req, res) => {
   res.status(404).json({ oops: "we dont serve that here, looking for /checkProxy or /shortener?" });
 });
@@ -104,6 +106,4 @@ function GetShortURL() {
   return shortUrl;
 }
 
-app.listen(1337, () => {
-  console.log("Server started on port 1337");
-});
+module.exports.handler = serverless(app);
