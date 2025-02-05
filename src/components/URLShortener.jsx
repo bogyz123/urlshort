@@ -90,10 +90,9 @@ export default function URLShortener() {
 
 function ShortenURL(url, setOldUrl, setNewUrl, setError, setAnimation) {
   if (url && url.length > 3) {
-    var endpoint = "https://4c34-178-221-71-48.ngrok-free.app/shortener/v1/shorten";
+    var endpoint = "https://linkifyshortener.netlify.app/api/shortener/v1/shorten";
     fetch(endpoint, {
       headers: {
-        "ngrok-skip-browser-warning": "69420",
         "Access-Control-Allow-Origin": "*",
         url: url,
       },

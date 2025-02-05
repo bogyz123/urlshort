@@ -8,7 +8,6 @@ export default function ShortURL() {
       var endpoint = "https://linkifyshortener.netlify.app/api/shortener/v1/getUrl/" + shortenedUrl;
       fetch(endpoint, {
         headers: {
-          "ngrok-skip-browser-warning": "69420",
           "Access-Control-Allow-Origin": "*",
         },
       }).then((res) => {
