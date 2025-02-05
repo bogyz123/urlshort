@@ -5,5 +5,5 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/shortener/:splat"
+  to = "src/.netlify/functions/shortener/:splat"
   status = 200
