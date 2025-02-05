@@ -14,7 +14,7 @@ export default function URLShortener() {
 
   const copyLink = async (link) => {
     if (link) {
-      const text = "https://linkify.bogyz.online/#/" + link;
+      const text = "https://linkifyshortener.netlify.app/#/" + link;
       await navigator.clipboard.writeText(text);
       setCopied(true);
     }

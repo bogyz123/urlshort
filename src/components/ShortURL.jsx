@@ -5,7 +5,7 @@ export default function ShortURL() {
   const { url } = useParams();
   useEffect(() => {
     function RedirectToOriginalURL(shortenedUrl) {
-      var endpoint = "https://4c34-178-221-71-48.ngrok-free.app/shortener/v1/getUrl/" + shortenedUrl;
+      var endpoint = "https://linkifyshortener.netlify.app/api/shortener/v1/getUrl/" + shortenedUrl;
       fetch(endpoint, {
         headers: {
           "ngrok-skip-browser-warning": "69420",

@@ -1,86 +1,73 @@
 const express = require("express");
-const app = express();
 const { MongoClient } = require("mongodb");
-const uri = process.env.MONGODB_URI;
-const serverless = require("serverless-http");
 const cors = require("cors");
+const serverless = require("serverless-http");
+
+const app = express();
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri);
 
 app.use(cors());
-app.options("*", cors());
+app.use(express.json()); 
 
 
 app.get("/", (req, res) => {
   res.status(404).json({ oops: "we dont serve that here, looking for /checkProxy or /shortener?" });
 });
 
-const client = new MongoClient(uri);
 
-async function RunServer() {
+async function runServer() {
   try {
     await client.connect();
     await client.db("shortbase").command({ ping: 1 });
-    console.log("good");
+    console.log("MongoDB connected successfully.");
   } catch (ex) {
-    console.error(ex);
+    console.error("MongoDB connection failed: ", ex);
   }
 }
 
-RunServer();
+runServer();
+
 
 app.get("/shortener/v1/getUrl/:url", async (req, res) => {
-  if (req.method !== "GET") {
-    res.status(405).json({ status: 405, message: "Method Not Allowed" });
-    return;
-  }
-
   const { url } = req.params;
-  let server;
 
   try {
-    server = await client.connect();
-    console.log("y");
-    const db = server.db("shortbase");
-    const schema = {
-      short: url,
-    };
-
+    const db = client.db("shortbase");
+    const schema = { short: url };
     const doc = await db.collection("shorturls").findOne(schema);
 
     if (!doc) {
-      res.status(404).json({ status: 404, message: "Not Found" });
-      return;
+      return res.status(404).json({ status: 404, message: "Not Found" });
     }
     res.status(200).json({ status: 200, message: doc });
   } catch (err) {
     res.status(400).json({ status: 400, message: err.message });
-  } finally {
-    if (server) {
-      server.close();
-    }
   }
 });
+
 
 app.post("/shortener/v1/shorten", async (req, res) => {
-  if (req.method !== "POST") {
-    res.status(405).json({ status: 405, message: "Method Not Allowed" });
+  const { url } = req.body; 
+
+  if (!url) {
+    return res.status(400).json({ status: 400, message: "URL is required." });
   }
-  const { url } = req.headers;
-  ShortenURL(url)
-    .then((response) => {
-      res.status(200).json({ ...response });
-    })
-    .catch((err) => {
-      res.status(400).json({ status: "Error! - " + err });
-    });
+
+  try {
+    const response = await shortenURL(url);
+    res.status(200).json(response);
+  } catch (err) {
+    res.status(400).json({ status: "Error!", message: err.message });
+  }
 });
 
-async function ShortenURL(url) {
-  let server;
-  try {
-    server = await client.connect();
-    const database = server.db("shortbase");
-    const randomUrl = GetShortURL();
 
+async function shortenURL(url) {
+  const randomUrl = generateShortURL();
+
+  try {
+    const database = client.db("shortbase");
     const result = await database.collection("shorturls").insertOne({
       original: url,
       short: randomUrl,
@@ -88,22 +75,22 @@ async function ShortenURL(url) {
 
     return { result: result, oldUrl: url, newUrl: randomUrl };
   } catch (error) {
-    throw error;
-  } finally {
-    if (server) {
-      server.close();
-    }
+    throw new Error("Error while inserting URL: " + error.message);
   }
 }
 
-function GetShortURL() {
-  var shortUrl = "";
-  var possibilities = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+function generateShortURL() {
+  const possibilities = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+  let shortUrl = "";
+
   for (let i = 0; i < 6; i++) {
-    var randomIndex = Math.floor(Math.random() * possibilities.length);
+    const randomIndex = Math.floor(Math.random() * possibilities.length);
     shortUrl += possibilities[randomIndex];
   }
+
   return shortUrl;
 }
+
 
 module.exports.handler = serverless(app);

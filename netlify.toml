@@ -1,5 +1,5 @@
-[functions]
-  directory = "netlify/functions"
+[[functions]]
+  directory = "src/netlify/functions"
   external_node_modules = ["express", "mongodb", "cors", "serverless-http"]
   node_bundler = "esbuild"
 
