@@ -1,9 +1,9 @@
-[[functions]]
+[functions]
   directory = "src/netlify/functions"
   external_node_modules = ["express", "mongodb", "cors", "serverless-http"]
   node_bundler = "esbuild"
 
-[[redirects]]
+[redirects]
   from = "/api/*"
   to = "src/.netlify/functions/shortener/:splat"
   status = 200
