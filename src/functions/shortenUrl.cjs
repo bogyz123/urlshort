@@ -2,11 +2,7 @@ const { MongoClient } = require("mongodb");
 const { v4: uuidv4 } = require("uuid");
 
 exports.handler = async (e) => {
-    const client = new MongoClient("mongodb+srv://bogdandjakovic123:teemo123321@cluster0.gp1nf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-    });
-
+    const client = new MongoClient("mongodb+srv://bogdandjakovic123:teemo123321@cluster0.gp1nf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
 
     try {
 

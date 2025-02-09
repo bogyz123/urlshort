@@ -2,10 +2,7 @@ const { MongoClient } = require("mongodb");
 
 
 exports.handler = async (e) => {
-    const client = new MongoClient("mongodb+srv://bogdandjakovic123:teemo123321@cluster0.gp1nf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-    });
+    const client = new MongoClient("mongodb+srv://bogdandjakovic123:teemo123321@cluster0.gp1nf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
     try {
         const url = e.path.split("/").pop();
         const db = client.db("shortbase");
