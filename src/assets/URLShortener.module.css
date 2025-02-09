@@ -9,6 +9,15 @@
   top: 15px;
   cursor: pointer;
 }
+.controls {
+  background-color: red;
+  display: flex;
+  min-width: 100%;
+  flex-direction: column;
+}
+.controls button {
+  width: 100%;
+}
 #urlShortener {
   padding: 12px;
   width: 100%;
@@ -18,8 +27,28 @@
   justify-content: center;
   align-items: center;
 }
+.shortenedContainer {
+display: flex;
+background-color: red;
+min-width: 100%;
+min-height: 100%;
+gap: 2px;
+}
+.shortenedContainer div {
+background-color: blue;
+height: fit-content;
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+text-align: center;
+}
+.shortenedContainer div:last-child {
+  background-color: orange;
+  display: flex;
+  align-items: end;
+}
 .animationNarrow {
-  animation: narrow 1.5s ease forwards;
+  animation: narrowx 1.5s ease forwards;
 }
 @keyframes narrow {
   0% {
@@ -81,19 +110,85 @@ input {
   flex-direction: column;
   gap: 12px;
 }
+
+.tableStyle {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.tableCellHeader {
+  font-weight: bold;
+  color: white;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.tableCellData {
+  padding: 12px 15px;
+  color: white;
+}
+
+table td {
+  border-bottom: 1px solid #ddd;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table td:last-child {
+  text-align: center;
+}
+
+table img {
+  max-width: 128px;
+}
+
+/* Button styles */
+.btnCopy, .btnOpen {
+  width: 100%;
+  padding: 12px 0;
+  margin: 8px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btnCopy {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.btnCopy:hover {
+  background-color: #45a049;
+}
+
+.btnOpen {
+  background-color: #008CBA; /* Blue */
+  color: white;
+}
+
+.btnOpen:hover {
+  background-color: #007bb5;
+}
+
+
+
 .urls {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 #qrcode {
-  width: fit-content;
-  height: fit-content;
-  transition: all 0.5s ease;
+  transition: scale 250ms ease;
+  max-width: 128px;
 }
 #qrcode:hover {
-  margin: 50px;
-  scale: 2;
+  scale: 1.5;
 }
 .animated:hover {
   background-color: rgb(68, 125, 182);
@@ -112,7 +207,6 @@ input {
   #urlContainer {
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     row-gap: 30px;
   }
   .error {

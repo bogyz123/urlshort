@@ -1,8 +1,7 @@
 import { useState } from "react";
-import styles from "../assets/URLShortener.module.css";
-import { Link, useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
-import goBack from "../assets/go-back.svg";
+import { useNavigate } from "react-router-dom";
+import styles from "../assets/URLShortener.module.css";
 
 export default function URLShortener() {
   const [urlToShorten, setUrlToShorten] = useState("");
@@ -14,7 +13,7 @@ export default function URLShortener() {
 
   const copyLink = async (link) => {
     if (link) {
-      const text = "https://linkifyshortener.netlify.app/#/" + link;
+      const text = "localhost:8888/api/" + link;
       await navigator.clipboard.writeText(text);
       setCopied(true);
     }
@@ -36,33 +35,44 @@ export default function URLShortener() {
           <>
             <div id={styles.shortenedData}>
               {oldUrl && newUrl && (
-                <>
-                  <div className="flex | centerX | space-around" id={styles.urlContainer}>
-                    <img src={goBack} alt="go back button" id={styles.goBack} onClick={() => reset()} />
-                    <div className={styles.urls}>
-                      <span>Old URL</span>
-                      <span>{oldUrl}</span>
-                    </div>
-                    <div id={styles.qrcode}>
-                      <QRCode value={newUrl} style={{ width: "100px", height: "100px" }} />
-                    </div>
-                    <div className={styles.urls}>
-                      <span>New URL</span>
-                      <span>{newUrl}</span>
-                    </div>
-                  </div>
-                  <Link className={`${styles.btn} ${styles.link} ${styles.animated}`} to={newUrl}>
-                    Open
-                  </Link>
-                  <button className={`${styles.btn} ${styles.animated}`} style={{ color: "white" }} onClick={async () => await copyLink(newUrl)}>
-                    Copy Link
-                  </button>
-                  {copied && (
-                    <div className="text-center" style={{ color: "lime", userSelect: "none" }}>
-                      <span>Successfully copied the link!</span>
-                    </div>
-                  )}
-                </>
+             
+             <>
+             <span style={{textAlign: 'center'}}>Successfully shortened URL!</span>
+             <table className={styles.tableStyle}>
+      <tbody>
+        <tr>
+          <td className={styles.tableCellHeader}><strong>Old URL:</strong></td>
+          <td className={styles.tableCellData}>{oldUrl}</td> {/* Replace `oldUrl` with your actual data */}
+        </tr>
+        <tr>
+          <td className={styles.tableCellHeader}><strong>New URL:</strong></td>
+          <td className={styles.tableCellData}>{newUrl}</td> {/* Replace `newUrl` with your actual data */}
+        </tr>
+        <tr>
+          <td className={styles.tableCellHeader}><strong>QR Code:</strong></td>
+          <td className={styles.tableCellData}>
+            <QRCode value={newUrl} style={{ width: '128px' }} />
+            {/* Replace `qrCodeUrl` with your actual QR code source */}
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.tableCellHeader}></td>
+          <td className={styles.tableCellData}>
+            <button className={styles.btnCopy} onClick={() => navigator.clipboard.writeText("https://linkifyurl.netlify.app/#/"+newUrl)}>
+              Copy Link
+            </button>
+            <button className={styles.btnOpen} onClick={() => window.open("https://linkifyurl.netlify.app/#/"+newUrl, '_blank')}>
+              Open
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+           </>
+           
+        
+            
               )}
             </div>
           </>
@@ -90,11 +100,10 @@ export default function URLShortener() {
 
 function ShortenURL(url, setOldUrl, setNewUrl, setError, setAnimation) {
   if (url && url.length > 3) {
-    var endpoint = "https://linkifyshortener.netlify.app/api/shortener/v1/shorten";
+    var endpoint = "https://linkifyurl.netlify.app/api/shortenUrl/" + url;
     fetch(endpoint, {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        url: url,
       },
       method: "POST",
     }).then((res) => {

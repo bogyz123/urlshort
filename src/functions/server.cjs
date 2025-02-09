@@ -11,6 +11,7 @@ app.use(cors());
 app.use(express.json()); 
 
 
+
 app.get("/", (req, res) => {
   res.status(404).json({ oops: "we dont serve that here, looking for /checkProxy or /shortener?" });
 });
@@ -74,7 +75,7 @@ async function shortenURL(url) {
     });
 
     return { result: result, oldUrl: url, newUrl: randomUrl };
-  } catch (error) {
+  } catch (err) {
     throw new Error("Error while inserting URL: " + error.message);
   }
 }
@@ -92,5 +93,3 @@ function generateShortURL() {
   return shortUrl;
 }
 
-
-module.exports.handler = serverless(app);

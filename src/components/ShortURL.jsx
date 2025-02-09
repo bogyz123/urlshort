@@ -5,7 +5,7 @@ export default function ShortURL() {
   const { url } = useParams();
   useEffect(() => {
     function RedirectToOriginalURL(shortenedUrl) {
-      var endpoint = "https://linkifyshortener.netlify.app/api/shortener/v1/getUrl/" + shortenedUrl;
+      var endpoint = "https://linkifyurl.netlify.app/api/getUrl/" + shortenedUrl;
       fetch(endpoint, {
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -15,7 +15,7 @@ export default function ShortURL() {
           return null;
         }
         res.json().then((json) => {
-          const originalURL = json.message.original;
+          const originalURL = json.original;
           var urlToOpen;
           if (!originalURL.startsWith("https://") || !originalURL.startsWith("http://")) {
             urlToOpen = "https://" + originalURL;
@@ -38,11 +38,13 @@ export default function ShortURL() {
       width: "100%",
       height: "100%",
       color: "white",
-      fontSize: "50px",
+      fontSize: "20px",
+      textAlign:'center',
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       userSelect: "none",
+      
     },
   };
   return (
