@@ -107,6 +107,7 @@ function ShortenURL(url, setOldUrl, setNewUrl, setError, setAnimation) {
       },
       method: "POST",
     }).then((res) => {
+      console.log("YES")
       if (res.status != 200) {
         return null;
       }

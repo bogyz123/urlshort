@@ -16,7 +16,7 @@ exports.handler = async (e) => {
           return {statusCode: 404, body: "Failed to get URL."}
         }
         console.log(doc);
-       return {statusCode:200, body:JSON.stringify({original: doc.original})}
+       return {statusCode:200,headers: {"Access-Control-Allow-Origin": "*"}, body:JSON.stringify({original: doc.original})}
       } catch (err) {
         console.log(err);
       }
