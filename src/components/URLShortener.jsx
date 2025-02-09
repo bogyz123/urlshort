@@ -104,6 +104,7 @@ function ShortenURL(url, setOldUrl, setNewUrl, setError, setAnimation) {
         return null;
       }
       res.json().then((json) => {
+        console.log("200")
         if (json.oldUrl && json.newUrl) {
           setAnimation(true);
           setTimeout(() => {

@@ -6,6 +6,7 @@ exports.handler = async (e) => {
     const client = new MongoClient(mongoUri);
 
     try {
+        console.log("called shortenUrl")
         // Check if the request contains a valid URL
         if (!e.path || e.path.split("/").length < 2) {
             return {
