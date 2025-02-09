@@ -6,44 +6,42 @@ exports.handler = async (e) => {
         useUnifiedTopology: true,
         useNewUrlParser: true,
     });
+
     try {
-        const url = e.path.split("/").pop();
+        await client.connect(); 
+
+        const url = e.path.split("/").pop(); 
         if (url) {
-            try {
-                const database = client.db("shortbase");
-                const collection = database.collection("urls");
-                const randomUrl = uuidv4(); 
-                const newDoc = {
-                    short: randomUrl,
-                    original: url
-                }
-                const res = await collection.insertOne(newDoc);
-                
-          
-                return { statusCode: 200, body: JSON.stringify({oldUrl:url, newUrl:randomUrl}) };
-              } 
-              catch (err) {
-                console.log(err)
-              return {
-                statusCode: 500,
-                body: "Failed to insert.",
-              }
-              }
+            const database = client.db("shortbase");
+            const collection = database.collection("urls");
+
+            const randomUrl = uuidv4(); 
+            const newDoc = {
+                short: randomUrl,
+                original: url
+            };
+
+           await collection.insertOne(newDoc); 
+
+            return { 
+                statusCode: 200, 
+                body: JSON.stringify({ oldUrl: url, newUrl: randomUrl }) 
+            };
         }
 
-        
         return {
             statusCode: 400,
             body: JSON.stringify({ message: "No URL provided." }),
         };
 
     } catch (err) {
-        console.error("Error saving URL:", err); 
+        console.error("Error saving URL:", err);
 
-        
         return {
             statusCode: 500,
             body: JSON.stringify({ message: "Error saving document.", error: err.message }),
         };
+    } finally {
+        await client.close(); 
     }
 };
