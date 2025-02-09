@@ -11,13 +11,7 @@ export default function URLShortener() {
   const [copied, setCopied] = useState(false);
   const [animation, setAnimation] = useState(false);
 
-  const copyLink = async (link) => {
-    if (link) {
-      const text = "localhost:8888/api/" + link;
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-    }
-  };
+
   const nav = useNavigate();
   const reset = () => {
     nav("/");
@@ -71,8 +65,6 @@ export default function URLShortener() {
 
            </>
            
-        
-            
               )}
             </div>
           </>
@@ -107,7 +99,7 @@ function ShortenURL(url, setOldUrl, setNewUrl, setError, setAnimation) {
       },
       method: "POST",
     }).then((res) => {
-      console.log("YES")
+
       if (res.status != 200) {
         return null;
       }
