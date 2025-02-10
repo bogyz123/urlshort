@@ -52,10 +52,10 @@ export default function URLShortener() {
         <tr>
           <td className={styles.tableCellHeader}></td>
           <td className={styles.tableCellData}>
-            <button className={styles.btnCopy} onClick={() => navigator.clipboard.writeText("https://linkifyurl.netlify.app/#/"+newUrl)}>
+            <button className={styles.btnCopy} onClick={() => navigator.clipboard.writeText("http://bogyz123.github.io/urlshort/#/"+newUrl)}>
               Copy Link
             </button>
-            <button className={styles.btnOpen} onClick={() => window.open("https://linkifyurl.netlify.app/#/"+newUrl, '_blank')}>
+            <button className={styles.btnOpen} onClick={() => window.open("https://bogyz123.github.io/urlshort/#/"+newUrl, '_blank')}>
               Open
             </button>
           </td>
@@ -92,27 +92,23 @@ export default function URLShortener() {
 
 function ShortenURL(url, setOldUrl, setNewUrl, setError, setAnimation) {
   if (url && url.length > 3) {
-    var endpoint = "https://linkifyurl.netlify.app/api/shortenUrl/" + url;
+    const endpoint = "https://3eec-178-223-10-224.ngrok-free.app/shortenUrl/" + url;
+
     fetch(endpoint, {
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        accept: 'application/json',
+        "ngrok-skip-browser-warning": "1",
       },
-      method: "POST",
-    }).then((res) => {
-
-      if (res.status != 200) {
-        return null;
-      }
-      res.json().then((json) => {
-        console.log("200")
-        if (json.oldUrl && json.newUrl) {
-          setAnimation(true);
-          setTimeout(() => {
-            setOldUrl(json.oldUrl);
-            setNewUrl(json.newUrl);
-          }, 600);
-        }
-      });
+    })
+    .then((res) => res.json()) // Wait for the JSON response
+    .then((data) => {
+      setNewUrl(data.short);
+      setOldUrl(url);
+      setAnimation(true);
+    })
+    .catch((err) => {
+      setError({ message: "Network error: " + err.message });
+      console.log(err)
     });
   } else {
     setError({ message: "You have entered an incorrect URL." });

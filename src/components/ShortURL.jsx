@@ -5,10 +5,11 @@ export default function ShortURL() {
   const { url } = useParams();
   useEffect(() => {
     function RedirectToOriginalURL(shortenedUrl) {
-      var endpoint = "https://linkifyurl.netlify.app/api/getUrl/" + shortenedUrl;
+      var endpoint = "https://3eec-178-223-10-224.ngrok-free.app/getUrl/" + shortenedUrl;
       fetch(endpoint, {
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": "1",
         },
       }).then((res) => {
         if (res.status === 404) {
