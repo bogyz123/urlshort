@@ -5,7 +5,7 @@ import ShortURL from "./components/ShortURL";
 function App() {
 
   return (
-    <HashRouter>
+    <HashRouter basename="/urlshort">
      <Routes>
       <Route path="/" element={<URLShortener />} />
       <Route path="/:url" element={<ShortURL />}/>
