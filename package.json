@@ -1,6 +1,5 @@
 {
   "name": "linkify",
-  "homepage": "https://bogyz123.github.io/urlshort",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,13 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+      "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@netlify/functions": "^3.0.0",
     "@types/express": "^5.0.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "gh-pages": "^6.3.0",
     "mongodb": "^6.13.0",
     "mongoose": "^8.10.0",
     "node": "^20.6.0",
