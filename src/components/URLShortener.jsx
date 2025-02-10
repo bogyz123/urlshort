@@ -13,15 +13,7 @@ export default function URLShortener() {
 
 
   const nav = useNavigate();
-  const reset = () => {
-    nav("/");
-    setCopied(false);
-    setError(null);
-    setNewUrl(null);
-    setOldUrl(null);
-    setUrlToShorten("");
-    setAnimation(false);
-  };
+  
   return (
     <div id={styles.urlShortener}>
       <div id={styles.shortenerInner} className={`${animation && styles.animationNarrow}`}>
@@ -36,26 +28,26 @@ export default function URLShortener() {
       <tbody>
         <tr>
           <td className={styles.tableCellHeader}><strong>Old URL:</strong></td>
-          <td className={styles.tableCellData}>{oldUrl}</td> {/* Replace `oldUrl` with your actual data */}
+          <td className={styles.tableCellData}>{oldUrl}</td> 
         </tr>
         <tr>
           <td className={styles.tableCellHeader}><strong>New URL:</strong></td>
-          <td className={styles.tableCellData}>{newUrl}</td> {/* Replace `newUrl` with your actual data */}
+          <td className={styles.tableCellData}>{newUrl}</td> 
         </tr>
         <tr>
           <td className={styles.tableCellHeader}><strong>QR Code:</strong></td>
           <td className={styles.tableCellData}>
             <QRCode value={newUrl} style={{ width: '128px' }} />
-            {/* Replace `qrCodeUrl` with your actual QR code source */}
+          
           </td>
         </tr>
         <tr>
           <td className={styles.tableCellHeader}></td>
           <td className={styles.tableCellData}>
-            <button className={styles.btnCopy} onClick={() => navigator.clipboard.writeText("http://bogyz123.github.io/urlshort/#/"+newUrl)}>
+            <button className={styles.btnCopy} onClick={() => navigator.clipboard.writeText("https://urlshort-jade.vercel.app/#/"+newUrl)}>
               Copy Link
             </button>
-            <button className={styles.btnOpen} onClick={() => window.open("https://bogyz123.github.io/urlshort/#/"+newUrl, '_blank')}>
+            <button className={styles.btnOpen} onClick={() => window.open("https://urlshort-jade.vercel.app/#/"+newUrl, '_blank')}>
               Open
             </button>
           </td>
