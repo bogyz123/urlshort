@@ -5,7 +5,7 @@ linkify is a simple url-shortener built in node.js, mongodb & react!
 
 
 ## 🔗 Link
-The website can be accessed [here (linkify.bogyz.online)](https://linkify.bogyz.online/)
+The website can be accessed [here (https://urlshort-jade.vercel.app/)](https://urlshort-jade.vercel.app/)
 
 ## Tools used
 
