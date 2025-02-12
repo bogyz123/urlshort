@@ -3,32 +3,33 @@ import { useParams } from "react-router";
 
 export default function ShortURL() {
   const { url } = useParams();
+
   useEffect(() => {
-    function RedirectToOriginalURL(shortenedUrl) {
-      var endpoint = "https://3eec-178-223-10-224.ngrok-free.app/getUrl/" + shortenedUrl;
-      fetch(endpoint, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "ngrok-skip-browser-warning": "1",
-        },
-      }).then((res) => {
-        if (res.status === 404) {
-          return null;
-        }
-        res.json().then((json) => {
-          const originalURL = json.original;
-          var urlToOpen;
-          if (!originalURL.startsWith("https://") || !originalURL.startsWith("http://")) {
-            urlToOpen = "https://" + originalURL;
-          } else {
-            urlToOpen = originalURL;
-          }
-          window.location.href = urlToOpen;
+    async function redirectToOriginalURL(shortenedUrl) {
+      const endpoint = `https://0382-178-223-10-224.ngrok-free.app/getUrl/${shortenedUrl}`;
+      try {
+        const response = await fetch(endpoint, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "ngrok-skip-browser-warning": "1",
+          },
         });
-      });
+
+        if (response.status === 404) {
+          return;
+        }
+
+        const json = await response.json();
+        const originalURL = json.original;
+        const urlToOpen = originalURL.startsWith("https://") || originalURL.startsWith("http://") ? originalURL : `https://${originalURL}`;
+        window.location.href = urlToOpen;
+      } catch (error) {
+        console.error('Failed to redirect:', error);
+      }
     }
-    RedirectToOriginalURL(url);
-  }, []);
+
+    redirectToOriginalURL(url);
+  }, [url]);
 
   const styles = {
     container: {
@@ -40,14 +41,14 @@ export default function ShortURL() {
       height: "100%",
       color: "white",
       fontSize: "20px",
-      textAlign:'center',
+      textAlign: 'center',
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       userSelect: "none",
-      
     },
   };
+
   return (
     <div style={styles.container}>
       <span>Loading {url}...</span>
