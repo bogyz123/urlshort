@@ -1,17 +1,17 @@
 
 # Linkify
 
-linkify is a simple url-shortener built in node.js, mongodb & react!
+Linkify is a very simple URL shortener! It allows you to create a masked shorter version of your URL, share it with others via link or a QR Code!
 
 
-## 🔗 Link
-The website can be accessed [here (https://urlshort-jade.vercel.app/)](https://urlshort-jade.vercel.app/)
 
-## Tools used
+How it's made
+-
 
-The tools I've used to build this are the following:
-- React
+- React.JS
+- React Router 
+- Node.JS (Express)
 - MongoDB
-- Node.JS
-- qrcodejs 
+It uses a Express server hosted locally on my computer to handle shorten requests as well as shorten URL retrieval from a MongoDB database. It is tunneled using the NGROK client.
+## [Visit Linkify here!](https://urlshort-jade.vercel.app/)
 
